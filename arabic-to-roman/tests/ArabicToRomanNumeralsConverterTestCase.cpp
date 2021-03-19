@@ -12,13 +12,13 @@ int main(int argc, char** argv) {
 	return RUN_ALL_TESTS();
 }
 
-std::string convertArabicNumberToRomanNumeral(const unsigned int arabicNumber) {
-	if (arabicNumber == 1)
-		return "I";
-	else if (arabicNumber == 2)
-		return "II";
-	else
-		return "III";
+std::string convertArabicNumberToRomanNumeral (unsigned int arabicNumber) {
+	std::string romanNumeral;
+	while(arabicNumber >= 1){
+		romanNumeral += "I";
+		--arabicNumber;
+	}
+	return romanNumeral;
 }
 
 TEST(ArabicToRomanNumeralsConverterTestCase, 1_isConvertedTo_I) {
