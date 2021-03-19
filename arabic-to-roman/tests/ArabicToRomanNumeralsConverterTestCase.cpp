@@ -15,8 +15,10 @@ int main(int argc, char** argv) {
 std::string convertArabicNumberToRomanNumeral(const unsigned int arabicNumber) {
 	if (arabicNumber == 1)
 		return "I";
-	else
+	else if (arabicNumber == 2)
 		return "II";
+	else
+		return "III";
 }
 
 TEST(ArabicToRomanNumeralsConverterTestCase, 1_isConvertedTo_I) {
@@ -25,4 +27,8 @@ TEST(ArabicToRomanNumeralsConverterTestCase, 1_isConvertedTo_I) {
 
 TEST(ArabicToRomanNumeralsConverterTestCase, 2_isConvertedTo_II) {
 	ASSERT_EQ("II", convertArabicNumberToRomanNumeral(2));
+}
+
+TEST(ArabicToRomanNumeralsConverterTestCase, 3_isConvertedTo_III) {
+	ASSERT_EQ("III", convertArabicNumberToRomanNumeral(3));
 }
