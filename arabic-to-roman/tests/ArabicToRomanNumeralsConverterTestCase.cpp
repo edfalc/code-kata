@@ -7,53 +7,15 @@
 
 #include <gtest/gtest.h>
 
-int main(int argc, char** argv) {
-	testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
-}
-
-struct ArabicToRomanMapping {
-	unsigned int arabicNumber;
-	std::string romanNumeral;
-};
-
-const std::size_t numberOfMappings { 13 };
-using ArabicToRomanMappings = std::array<ArabicToRomanMapping, numberOfMappings>;
-const ArabicToRomanMappings arabicToRomanMappings = { {
-		{ 1000, "M" },
-		{ 900, "CM" },
-		{ 500, "D" },
-		{ 400, "CD" },
-		{ 100, "C" },
-		{ 90, "XC" },
-		{ 50, "L" },
-		{ 40, "XL" },
-		{ 10, "X" },
-		{ 9, "IX" },
-		{ 5, "V" },
-		{ 4, "IV" },
-		{ 1, "I" }
-} };
-
-std::string convertArabicNumberToRomanNumeral (unsigned int arabicNumber) {
-	std::string romanNumeral;
-
-	for (const auto& mapping : arabicToRomanMappings) {
-		while (arabicNumber >= mapping.arabicNumber) {
-			romanNumeral += mapping.romanNumeral;
-			arabicNumber -= mapping.arabicNumber;
-		}
-	}
-
-	return romanNumeral;
-}
+#include "../includes/ArabicToRoman.h"
 
 class RomanNumeralAssert {
 public:
 	RomanNumeralAssert() = delete;
 	explicit RomanNumeralAssert(const unsigned int arabicNumber) : arabicNumberToConvert(arabicNumber) {}
 	void isConvertedToRomanNumeral (const std::string& expectedRomanNumeral) const {
-		ASSERT_EQ(expectedRomanNumeral, convertArabicNumberToRomanNumeral(arabicNumberToConvert));
+		ArabicToRoman testConversion { arabicNumberToConvert };
+		ASSERT_EQ(expectedRomanNumeral, testConversion.convertArabicNumberToRomanNumeral(arabicNumberToConvert));
 	}
 private:
 	const unsigned int arabicNumberToConvert;
